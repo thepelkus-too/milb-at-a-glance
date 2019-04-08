@@ -36,9 +36,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <header className="App-header">
-        Pay the minor leaguers Games count: {games.length}
-      </header>
+      <header className="App-header">Pay the minor leaguers</header>
 
       <div>
         {games.map(g => {
