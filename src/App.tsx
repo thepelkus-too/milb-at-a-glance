@@ -51,6 +51,7 @@ const App = () => {
           };
 
           const statusMap: { [index: string]: () => string } = {
+            P: () => "Pre-game",
             F: () => "Final",
             S: () => {
               const gameDate = new Date(g.gameDate);
