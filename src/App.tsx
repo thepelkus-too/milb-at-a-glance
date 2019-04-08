@@ -12,6 +12,17 @@ import {
   today
 } from "./util";
 
+const timeForGame = (g: Game): string => {
+  const gameDate = new Date(g.gameDate);
+  const gameHourRaw = gameDate.getHours();
+  const gameHour = gameHourRaw > 12 ? gameHourRaw - 12 : gameHourRaw;
+  const gameAMPM = gameHourRaw > 11 ? "PM" : "AM";
+  return `${gameHour}:${gameDate
+    .getMinutes()
+    .toString()
+    .padStart(2, "0")} ${gameAMPM}`;
+};
+
 const App = () => {
   const [games, setGames] = useState<Game[]>([]);
   useEffect(() => {
@@ -40,7 +51,7 @@ const App = () => {
     <div className="App">
       <header className="App-header">Pay the minor leaguers</header>
 
-      <div>
+      <div id="gamesContainer">
         {games.map(g => {
           const home = { ...g.teams.home, ...g.teams.home.team };
           const away = { ...g.teams.away, ...g.teams.away.team };
@@ -51,19 +62,9 @@ const App = () => {
           };
 
           const statusMap: { [index: string]: () => string } = {
-            P: () => "Pre-game",
+            P: () => `Pre-game (${timeForGame(g)} start)`,
             F: () => "Final",
-            S: () => {
-              const gameDate = new Date(g.gameDate);
-              const gameHourRaw = gameDate.getHours();
-              const gameHour =
-                gameHourRaw > 12 ? gameHourRaw - 12 : gameHourRaw;
-              const gameAMPM = gameHourRaw > 11 ? "PM" : "AM";
-              return `${gameHour}:${gameDate
-                .getMinutes()
-                .toString()
-                .padStart(2, "0")} ${gameAMPM} start`;
-            },
+            S: () => `${timeForGame(g)} start`,
             I: () => `${lineScore.inningState} ${lineScore.currentInning}`
           };
           const defaultDisplay = () => "???";
@@ -71,9 +72,14 @@ const App = () => {
             statusMap[g.status.statusCode] || defaultDisplay;
 
           return (
-            <div>
-              {away.name} {away.score} / {home.name} {home.score} ::{" "}
-              {inningDisplayStrategy()}
+            <div key={g.gamePk} className="game">
+              <div className="away">
+                {away.abbreviation.toUpperCase()} {away.score}
+              </div>
+              <div className="home">
+                {home.abbreviation.toUpperCase()} {home.score}
+              </div>
+              <div className="inning">{inningDisplayStrategy()}</div>
             </div>
           );
         })}
