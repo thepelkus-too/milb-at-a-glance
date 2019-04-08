@@ -16,11 +16,12 @@ const App = () => {
   const [games, setGames] = useState<Game[]>([]);
   useEffect(() => {
     const getMilbData = async () => {
-      const ids = Object.keys(SportId)
+      const idsAtoAAA = Object.keys(SportId)
+        .sort((a, b) => parseInt(b, 10) - parseInt(a, 10))
         .map(k => Number(k))
         .filter(num => num > 0);
 
-      const requestList = ids.map(id =>
+      const requestList = idsAtoAAA.map(id =>
         fetch(feedUrl(id, today())).then(response => response.json())
       );
 
