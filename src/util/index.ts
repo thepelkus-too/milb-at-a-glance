@@ -108,7 +108,7 @@ export const feedUrl = (sportId: SportId, date: string) =>
   `https://statsapi.mlb.com/api/v1/schedule?language=en&sportId=${sportId}&date=${date}&sortBy=gameDate&hydrate=game(content(summary)),linescore(runners),flags,team,review`;
 
 export const gamesFromFeed = (feed: Feed): Game[] => {
-  console.log(feed);
+  // console.log(feed);
 
   return feed.dates[0].games;
 };
@@ -132,3 +132,18 @@ export const gamesByParentOrg = (games: Game[], parentOrg: MLBTeam): Game[] =>
       homeTeam(game).parentOrgName === parentOrg ||
       awayTeam(game).parentOrgName === parentOrg
   );
+
+// TODO: Stub date for all tests? (Component rendering is getting real dates right now)
+export const today = () => {
+  const dateNow = Date.now();
+  const fullDate = new Date(dateNow);
+
+  const monthNum = fullDate.getMonth() + 1;
+  const dateNum = fullDate.getDate();
+  const yearNum = fullDate.getFullYear();
+
+  const [month, day, year] = [monthNum, dateNum, yearNum].map(field =>
+    field.toString().padStart(2, "0")
+  );
+  return `${month}/${day}/${year}`;
+};

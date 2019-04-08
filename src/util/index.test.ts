@@ -4,7 +4,8 @@ import {
   SportId,
   feedUrl,
   gamesByParentOrg,
-  MLBTeam
+  MLBTeam,
+  today
 } from "./index";
 import getSampleData, {
   getSampleGames
@@ -49,6 +50,16 @@ describe("gamesByParentOrg", () => {
 
     if (!result) throw "No result";
     expect(result[0].teams.away.team.id).toBe(515);
+  });
+});
+
+describe("today", () => {
+  it("returns todays date in mm/dd/yyyy format", () => {
+    const realDateNow = Date.now.bind(global.Date);
+    const dateNowStub = jest.fn(() => 1554717600000);
+    global.Date.now = dateNowStub;
+    expect(today()).toBe("04/08/2019");
+    global.Date.now = realDateNow;
   });
 });
 

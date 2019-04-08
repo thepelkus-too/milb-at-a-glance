@@ -8,7 +8,8 @@ import {
   SportId,
   feedUrl,
   gamesByParentOrg,
-  MLBTeam
+  MLBTeam,
+  today
 } from "./util";
 
 const App = () => {
@@ -20,7 +21,7 @@ const App = () => {
         .filter(num => num > 0);
 
       const requestList = ids.map(id =>
-        fetch(feedUrl(id, "04/07/2019")).then(response => response.json())
+        fetch(feedUrl(id, today())).then(response => response.json())
       );
 
       const results = await Promise.all(requestList);
@@ -43,20 +44,34 @@ const App = () => {
           const home = { ...g.teams.home, ...g.teams.home.team };
           const away = { ...g.teams.away, ...g.teams.away.team };
 
-          const gameIsOver = g.status.statusCode === "F";
           const lineScore = g.linescore || {
             inningState: "-",
             currentInning: "-"
           };
 
-          const inningDisplay = gameIsOver
-            ? "Final"
-            : `${lineScore.inningState} ${lineScore.currentInning}`;
+          const statusMap: { [index: string]: () => string } = {
+            F: () => "Final",
+            S: () => {
+              const gameDate = new Date(g.gameDate);
+              const gameHourRaw = gameDate.getHours();
+              const gameHour =
+                gameHourRaw > 12 ? gameHourRaw - 12 : gameHourRaw;
+              const gameAMPM = gameHourRaw > 11 ? "PM" : "AM";
+              return `${gameHour}:${gameDate
+                .getMinutes()
+                .toString()
+                .padStart(2, "0")} ${gameAMPM} start`;
+            },
+            I: () => `${lineScore.inningState} ${lineScore.currentInning}`
+          };
+          const defaultDisplay = () => "???";
+          const inningDisplayStrategy =
+            statusMap[g.status.statusCode] || defaultDisplay;
 
           return (
             <div>
               {away.name} {away.score} / {home.name} {home.score} ::{" "}
-              {inningDisplay}
+              {inningDisplayStrategy()}
             </div>
           );
         })}
