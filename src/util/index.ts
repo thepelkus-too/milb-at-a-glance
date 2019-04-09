@@ -55,6 +55,9 @@ export type Status = {
 export type LineScore = {
   inningState: string;
   currentInning: number;
+  balls: number;
+  strikes: number;
+  outs: number;
 };
 
 export type GameTeams = {

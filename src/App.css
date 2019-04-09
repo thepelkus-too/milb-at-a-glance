@@ -36,7 +36,7 @@ a {
 
 .game {
   display: grid;
-  grid-template-columns: 1fr 1fr 2fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
 .away,
@@ -47,7 +47,6 @@ a {
 
 .away,
 .home {
-  padding-right: 1em;
 }
 
 @keyframes App-logo-spin {

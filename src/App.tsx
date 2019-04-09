@@ -57,6 +57,9 @@ const App = () => {
           const away = { ...g.teams.away, ...g.teams.away.team };
 
           const lineScore = g.linescore || {
+            balls: 0,
+            strikes: 0,
+            outs: 0,
             inningState: "-",
             currentInning: "-"
           };
@@ -68,6 +71,7 @@ const App = () => {
             S: () => `${timeForGame(g)} start`,
             I: () => `${lineScore.inningState} ${lineScore.currentInning}`
           };
+          const gameInProgress = g.status.statusCode === "I";
           const defaultDisplay = () => "???";
           const inningDisplayStrategy =
             statusMap[g.status.statusCode] || defaultDisplay;
@@ -88,6 +92,14 @@ const App = () => {
                 {home.abbreviation.toUpperCase()} {home.score}
               </div>
               <div className="inning">{inningDisplayStrategy()}</div>
+              <div className="bso">
+                {gameInProgress && (
+                  <span>
+                    {lineScore.balls}-{lineScore.strikes}, {lineScore.outs} out
+                    {lineScore.outs === 1 ? "" : "s"}
+                  </span>
+                )}
+              </div>
             </a>
           );
         })}
