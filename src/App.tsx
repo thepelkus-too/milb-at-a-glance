@@ -30,7 +30,7 @@ const App = () => {
       const idsAtoAAA = Object.keys(SportId)
         .sort((a, b) => parseInt(b, 10) - parseInt(a, 10))
         .map(k => Number(k))
-        .filter(num => num > 0);
+        .filter(num => !!num);
 
       const requestList = idsAtoAAA.map(id =>
         fetch(feedUrl(id, today())).then(response => response.json())
