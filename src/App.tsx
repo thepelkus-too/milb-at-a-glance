@@ -72,8 +72,15 @@ const App = () => {
           const inningDisplayStrategy =
             statusMap[g.status.statusCode] || defaultDisplay;
 
+          const gamedayUrl = `https://www.milb.com/gameday/${g.gamePk}`;
+
           return (
-            <div key={g.gamePk} className="game">
+            <a
+              href={gamedayUrl}
+              key={g.gamePk}
+              className="game"
+              target="_blank"
+            >
               <div className="away">
                 {away.abbreviation.toUpperCase()} {away.score}
               </div>
@@ -81,7 +88,7 @@ const App = () => {
                 {home.abbreviation.toUpperCase()} {home.score}
               </div>
               <div className="inning">{inningDisplayStrategy()}</div>
-            </div>
+            </a>
           );
         })}
       </div>
