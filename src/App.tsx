@@ -91,15 +91,23 @@ const App = () => {
               <div className="home">
                 {home.abbreviation.toUpperCase()} {home.score}
               </div>
-              <div className="inning">{inningDisplayStrategy()}</div>
-              <div className="bso">
-                {gameInProgress && (
-                  <span>
-                    {lineScore.balls}-{lineScore.strikes}, {lineScore.outs} out
-                    {lineScore.outs === 1 ? "" : "s"}
-                  </span>
-                )}
-              </div>
+              {!gameInProgress && (
+                <div className="notInProgress">{inningDisplayStrategy()}</div>
+              )}
+              {gameInProgress && (
+                <div className="inning">{inningDisplayStrategy()}</div>
+              )}
+              {gameInProgress && (
+                <div className="bso">
+                  {gameInProgress && (
+                    <span>
+                      {lineScore.balls}-{lineScore.strikes}, {lineScore.outs}{" "}
+                      out
+                      {lineScore.outs === 1 ? "" : "s"}
+                    </span>
+                  )}
+                </div>
+              )}
             </a>
           );
         })}
