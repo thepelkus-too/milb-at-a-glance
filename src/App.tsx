@@ -31,7 +31,7 @@ const BasesContainer = styled.div`
   position: relative;
   width: 1.75em;
   height: 1.4em;
-  margin: 0 1em;
+  margin: 0 0.5em;
 `;
 
 const BaseBox = styled.div`
@@ -128,7 +128,8 @@ const App = () => {
             O: () => "Game Over",
             F: () => "Final",
             S: () => `${timeForGame(g)} start`,
-            I: () => `${lineScore.inningState} ${lineScore.currentInning}`
+            I: () =>
+              `${lineScore.inningState.slice(0, 3)} ${lineScore.currentInning}`
           };
           const gameInProgress = g.status.statusCode === "I";
           const defaultDisplay = () => "???";
