@@ -58,6 +58,23 @@ export type LineScore = {
   balls: number;
   strikes: number;
   outs: number;
+  offense: Runners;
+};
+
+export enum Base {
+  first = "first",
+  second = "second",
+  third = "third"
+}
+
+type Bases = keyof typeof Base;
+
+export type Runners = { [base in Bases]: RunnerInfo };
+
+export type RunnerInfo = {
+  fullName: string;
+  id: number;
+  link: string;
 };
 
 export type GameTeams = {

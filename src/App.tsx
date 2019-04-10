@@ -1,5 +1,5 @@
-import React, { Component, useState, useEffect } from "react";
-import logo from "./logo.svg";
+import styled, { StyledFunction } from "styled-components";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import {
   gamesFromFeed,
@@ -21,6 +21,64 @@ const timeForGame = (g: Game): string => {
     .getMinutes()
     .toString()
     .padStart(2, "0")} ${gameAMPM}`;
+};
+
+interface BaseBoxProps {
+  occupied?: boolean;
+}
+
+const BasesContainer = styled.div`
+  position: relative;
+  width: 1.75em;
+  height: 1.4em;
+  margin: 0 1em;
+`;
+
+const BaseBox = styled.div`
+  background: ${(props: BaseBoxProps) => (props.occupied ? "white" : "#0000")}
+  border: 1px solid white;
+  height: 0.5em;
+  transform: rotate(45deg);
+  width: 0.5em;
+`;
+
+const FirstBase = styled(BaseBox)`
+  position: absolute;
+  right: 0;
+  bottom: 0;
+`;
+
+const SecondBase = styled(BaseBox)`
+  position: absolute;
+  right: 0.55em;
+  top: 0;
+`;
+
+const ThirdBase = styled(BaseBox)`
+  position: absolute;
+  left: 0;
+  bottom: 0;
+`;
+
+type BasesProps = {
+  game: Game;
+};
+
+const Bases = ({ game }: BasesProps) => {
+  const possibleBases = ["first", "second", "third"];
+  const actualBases = Object.keys(game.linescore.offense);
+
+  const baseOccupationMap = possibleBases.map(base =>
+    actualBases.includes(base)
+  );
+
+  return (
+    <BasesContainer>
+      <FirstBase occupied={baseOccupationMap[0]} />
+      <SecondBase occupied={baseOccupationMap[1]} />
+      <ThirdBase occupied={baseOccupationMap[2]} />
+    </BasesContainer>
+  );
 };
 
 const App = () => {
@@ -99,15 +157,13 @@ const App = () => {
               )}
               {gameInProgress && (
                 <div className="bso">
-                  {gameInProgress && (
-                    <span>
-                      {lineScore.balls}-{lineScore.strikes}, {lineScore.outs}{" "}
-                      out
-                      {lineScore.outs === 1 ? "" : "s"}
-                    </span>
-                  )}
+                  <div>
+                    {lineScore.balls}-{lineScore.strikes}, {lineScore.outs} out
+                    {lineScore.outs === 1 ? "" : "s"}
+                  </div>
                 </div>
               )}
+              {gameInProgress && <Bases game={g} />}
             </a>
           );
         })}

@@ -39,7 +39,7 @@ a {
 
 .game {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   line-height: 1.5;
   padding: 0.5em 0;
   border-bottom: 1px solid #666;
@@ -53,6 +53,10 @@ a {
 
 .notInProgress {
   grid-column-start: 3;
-  grid-column-end: span 2;
+  grid-column-end: span 3;
   text-align: center;
+}
+
+.bso {
+  display: flex;
 }
