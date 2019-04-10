@@ -125,6 +125,7 @@ const App = () => {
           const statusMap: { [index: string]: () => string } = {
             P: () => `Pre-game (${timeForGame(g)} start)`,
             PW: () => `Warmup (${timeForGame(g)} start)`,
+            O: () => "Game Over",
             F: () => "Final",
             S: () => `${timeForGame(g)} start`,
             I: () => `${lineScore.inningState} ${lineScore.currentInning}`
