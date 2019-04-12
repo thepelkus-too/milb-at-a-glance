@@ -49,6 +49,9 @@ a {
 
 .away,
 .home {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   font-weight: bold;
 }
 

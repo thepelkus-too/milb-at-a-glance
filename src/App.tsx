@@ -1,5 +1,5 @@
 import styled, { StyledFunction } from "styled-components";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, ReactNode } from "react";
 import "./App.css";
 import {
   gamesFromFeed,
@@ -81,6 +81,10 @@ const Bases = ({ game }: BasesProps) => {
   );
 };
 
+const DetailedState = styled.div`
+  font-size: 0.75em;
+`;
+
 const App = () => {
   const [games, setGames] = useState<Game[]>([]);
   useEffect(() => {
@@ -122,9 +126,15 @@ const App = () => {
             currentInning: "-"
           };
 
-          const statusMap: { [index: string]: () => string } = {
+          const statusMap: { [index: string]: () => ReactNode } = {
             P: () => `Pre-game (${timeForGame(g)} start)`,
             PW: () => `Warmup (${timeForGame(g)} start)`,
+            PR: () => (
+              <div>
+                <div>Preview ({timeForGame(g)} start)</div>
+                <DetailedState>{g.status.detailedState}</DetailedState>
+              </div>
+            ),
             O: () => "Game Over",
             F: () => "Final",
             S: () => `${timeForGame(g)} start`,
