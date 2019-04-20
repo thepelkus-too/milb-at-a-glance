@@ -51,6 +51,7 @@ export type Game = {
 export type Status = {
   statusCode: string;
   detailedState: string;
+  reason: string;
 };
 
 export type LineScore = {

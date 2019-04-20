@@ -129,6 +129,12 @@ const App = () => {
           const statusMap: { [index: string]: () => ReactNode } = {
             P: () => `Pre-game (${timeForGame(g)} start)`,
             PW: () => `Warmup (${timeForGame(g)} start)`,
+            DR: () => (
+              <div>
+                <div>Postponed</div>
+                <DetailedState>{g.status.reason}</DetailedState>
+              </div>
+            ),
             PR: () => (
               <div>
                 <div>Preview ({timeForGame(g)} start)</div>
