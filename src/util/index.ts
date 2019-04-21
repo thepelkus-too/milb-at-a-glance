@@ -132,7 +132,7 @@ export const feedUrl = (sportId: SportId, date: string) =>
 export const gamesFromFeed = (feed: Feed): Game[] => {
   // console.log(feed);
 
-  return feed.dates[0].games;
+  return feed.dates[0] ? feed.dates[0].games : [];
 };
 
 export const homeTeam = (game: Game): Team => game.teams.home.team;
