@@ -137,8 +137,12 @@ const App = () => {
             ),
             IR: () => (
               <div>
-                <div>Delayed</div>
-                <DetailedState>{g.status.detailedState}</DetailedState>
+                <div>{g.status.detailedState}</div>
+                <DetailedState>
+                  {`${lineScore.inningState.slice(0, 3)} ${
+                    lineScore.currentInning
+                  }`.toUpperCase()}
+                </DetailedState>
               </div>
             ),
             PR: () => (
