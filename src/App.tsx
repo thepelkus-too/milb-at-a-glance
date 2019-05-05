@@ -135,6 +135,12 @@ const App = () => {
                 <DetailedState>{g.status.reason}</DetailedState>
               </div>
             ),
+            IR: () => (
+              <div>
+                <div>Delayed</div>
+                <DetailedState>{g.status.detailedState}</DetailedState>
+              </div>
+            ),
             PR: () => (
               <div>
                 <div>Preview ({timeForGame(g)} start)</div>
