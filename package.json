@@ -14,7 +14,7 @@
     "react-scripts": "2.1.8",
     "styled-components": "^4.2.0",
     "styled-system": "^4.1.0",
-    "typescript": "^3.4.2"
+    "typescript": "^3.5.2"
   },
   "scripts": {
     "start": "react-scripts start",
