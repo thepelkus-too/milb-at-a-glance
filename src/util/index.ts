@@ -119,7 +119,8 @@ export enum SportId {
   AAA = 11,
   AA = 12,
   HIGHA = 13,
-  LOWA = 14
+  LOWA = 14,
+  SHORTA = 15
 }
 
 export enum MLBTeam {
