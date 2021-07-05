@@ -1426,12 +1426,12 @@
     "@types/react-native" "*"
     csstype "^2.2.0"
 
-"@types/styled-system@^5.1.1":
-  version "5.1.1"
-  resolved "https://registry.yarnpkg.com/@types/styled-system/-/styled-system-5.1.1.tgz#22eff9e4b2f89cd2222c15053f8c11be5ec9c357"
-  integrity sha512-RAF9Erif51vbD1ZbIiGN4ZrgxpSr44iMXrPjQK5+tI7PWLDugKepTWj7T/LqG5VfaYYIrEmOCzIpulhv+/D/XQ==
+"@types/styled-system@^5.1.12":
+  version "5.1.12"
+  resolved "https://registry.yarnpkg.com/@types/styled-system/-/styled-system-5.1.12.tgz#4f3ca8da3dffe3c5a6cc3b2a97f51b41464c104a"
+  integrity sha512-7x4BYKKfK9QewfsFC2x5r9BK/OrfX+JF/1P21jKPMHruawDw9gvG7bTZgTVk6YkzDO2JUlsk4i8hdiAepAhD0g==
   dependencies:
-    csstype "^2.6.4"
+    csstype "^3.0.2"
 
 "@types/yargs-parser@*":
   version "13.0.0"
@@ -3298,10 +3298,15 @@ cssstyle@^1.1.1:
   dependencies:
     cssom "0.3.x"
 
-csstype@^2.2.0, csstype@^2.6.4:
+csstype@^2.2.0:
   version "2.6.6"
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.6.tgz#c34f8226a94bbb10c32cc0d714afdf942291fc41"
   integrity sha512-RpFbQGUE74iyPgvr46U9t1xoQBM8T4BL8SxrN66Le2xYAPSaDJJKeztV3awugusb3g3G9iL8StmkBBXhcbbXhg==
+
+csstype@^3.0.2:
+  version "3.0.8"
+  resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.0.8.tgz#d2266a792729fb227cd216fb572f43728e1ad340"
+  integrity sha512-jXKhWqXPmlUeoQnF/EhTtTl4C9SnrxSH/jZUih3jmO6lBKr99rP3/+FmrMj4EFpOXzMtXHAZkd3x0E6h6Fgflw==
 
 cyclist@~0.2.2:
   version "0.2.2"
